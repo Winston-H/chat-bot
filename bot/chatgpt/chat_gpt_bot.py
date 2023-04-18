@@ -26,7 +26,7 @@ class ChatGPTBot(Bot, OpenAIImage):
             openai.api_base = conf().get("open_ai_api_base")
         proxy = conf().get("proxy")
         if proxy:
-            openai.proxy = proxy
+            openai.api_base = proxy
         if conf().get("rate_limit_chatgpt"):
             self.tb4chatgpt = TokenBucket(conf().get("rate_limit_chatgpt", 20))
 
@@ -129,7 +129,7 @@ class ChatGPTBot(Bot, OpenAIImage):
             response = openai.ChatCompletion.create(
                 api_key=api_key, messages=session.messages, **self.args
             )
-            # logger.info("[ChatGPT] reply={}, total_tokens={}".format(response.choices[0]['message']['content'], response["usage"]["total_tokens"]))
+            logger.info("[ChatGPT] reply={}, total_tokens={}".format(response.choices[0]['message']['content'], response["usage"]["total_tokens"]))
             return {
                 "total_tokens": response["usage"]["total_tokens"],
                 "completion_tokens": response["usage"]["completion_tokens"],
