@@ -26,7 +26,7 @@ class ChatGPTBot(Bot, OpenAIImage):
             openai.api_base = conf().get("open_ai_api_base")
         proxy = conf().get("proxy")
         if proxy:
-            openai.api_base = proxy
+            openai.proxy = proxy
         if conf().get("rate_limit_chatgpt"):
             self.tb4chatgpt = TokenBucket(conf().get("rate_limit_chatgpt", 20))
 
