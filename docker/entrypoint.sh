@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+pip3 install webdriver-manager==3.8.6
 
 # build prefix
 CHATGPT_ON_WECHAT_PREFIX=${CHATGPT_ON_WECHAT_PREFIX:-""}
